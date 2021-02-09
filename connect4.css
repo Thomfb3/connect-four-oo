@@ -1,0 +1,101 @@
+/* game board table */
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+h1 {
+  color: rgb(255, 81, 0);
+  text-align: center;
+  font-family: 'Bangers', cursive;
+  font-size: 50px;
+}
+
+#board td {
+  width: 50px;
+  height: 50px;
+  border: solid 1px #666;
+}
+
+#board {
+  margin-bottom: 30px;
+}
+
+.abs-center {
+  position: absolute;
+  top: 50%; /* optically centered */
+  left: 50%;
+  /* https://autoprefixer.github.io/ */
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+}
+
+.btn-container {
+  text-align: center;
+  position: fixed;
+  bottom: 50px;
+  width: 100%;
+}
+
+.btn {
+  background-color:rgb(255, 81, 0); 
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 30px;
+  font-family: 'Bangers', cursive;
+  padding: 15px 20px;
+  outline: none;
+  transition: all 1s cubic-bezier(0, 0.71, 0.26, 0.99);
+}
+
+.btn:hover {
+  padding: 15px 35px;
+  cursor: pointer;
+}
+
+
+
+.player-colors {
+  text-align: center; 
+  margin-bottom: 20px;
+}
+
+/* pieces are div within game table cells: draw as colored circles */
+
+@keyframes slideDown {
+  from {transform: translate(0%, -900%);}
+  to {transform: translate(0%, 0%);}
+}
+
+.piece {
+  /* TODO: make into circles */
+  border-radius: 50%;
+  margin: 5px;
+  width: 80%;
+  height: 80%;
+  animation-name: slideDown;
+  animation-duration: 1s;
+  animation: slideDown .5s cubic-bezier(.13,-0.01,1,.17);
+  /* I've used this tool in the past to produce cubic-bezier */
+  /* https://cubic-bezier.com/#.13,-0.01,1,.17 */
+}
+
+.piece.p1 {
+  background-color: red;
+}
+
+.piece.p2 {
+  background-color: blue;
+}
+
+/* column-top is table row of clickable areas for each column */
+
+#column-top td {
+  border: dashed 1px lightgray;
+}
+
+#column-top td:hover {
+  background-color: gold;
+}
