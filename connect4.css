@@ -2,13 +2,61 @@
 body {
   padding: 0px;
   margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+
 h1 {
-  color: rgb(255, 81, 0);
+  color: #fff;
   text-align: center;
   font-family: 'Bangers', cursive;
-  font-size: 50px;
+  font-size: 65px;
+  margin: 0px;
+}
+
+select {
+  background-color: #ffc1a5;
+  padding: 4px;
+  border-radius: 5px;
+  border: 1px solid rgb(255, 81, 0);
+}
+
+.header {
+  background-color:rgb(255, 81, 0);
+  letter-spacing: 3px;
+  margin: 0px;
+  padding: 20px 0px 20px 0px;
+}
+
+.subheader {
+  margin: 0px;
+  padding: 0px 15px 15px 15px;
+  display: inline-block;
+  position: absolute;
+  left: 0px;
+  top: 30px;
+}
+
+.players-labels {
+  display: block;
+  letter-spacing: 1px;
+  padding-bottom: 5px;
+  color: #fff;  
+}
+
+.player-colors {
+  background-color: #ff7500; 
+  padding: 20px;
+  text-align: center; 
+  margin-bottom: 20px;
+}
+
+input {
+  background-color: #ffead2;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 5px;
+  border: 1px solid rgb(255, 153, 0);
 }
 
 #board td {
@@ -55,12 +103,6 @@ h1 {
   cursor: pointer;
 }
 
-
-
-.player-colors {
-  text-align: center; 
-  margin-bottom: 20px;
-}
 
 /* pieces are div within game table cells: draw as colored circles */
 
