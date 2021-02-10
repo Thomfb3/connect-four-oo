@@ -25,12 +25,30 @@
 
 <body>
     <div class="hide">
-        <div id="game">
-            <table id="board"></table>
+        <h1>Connect 4</h1>
+        <label>Select Number of Players</label>
+        <select name="number-of-players" id="number-of-players">
+            <option value="2">Two Player</option>
+            <option value="3">Three Player</option>
+            <option value="4">Four Player</option>
+            <option value="1">One Player - Play the Computer</option>
+        </select>
+        <div id="player-inputs" class="player-colors">
+
+            <input id="p1-color" type="text" placeholder="Player 1 color">
+            <input id="p2-color" type="text" placeholder="Player 2 color">
+        </div>
+
+        <div class="abs-center">
+            <div id="game">
+                <table id="board"></table>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button class="btn new-game" id="new-game">New Game</button>
         </div>
     </div>
-
-    <button style="display: none;" class="new-game" id="new-game">New Game</button>
 
 
     <script type="text/javascript" src="../connect4.js"></script>

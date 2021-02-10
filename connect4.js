@@ -7,11 +7,12 @@
 
 
 class Game {
-  constructor(p1, p2, width, height) {
-    this.players = [p1, p2];
+  constructor(players, width, height) {
+    this.players = players;
     this.width = width;
     this.height = height;
-    this.currPlayer = p1;
+    this.currPlayer = players[0];
+    this.playerState = 0
     this.makeBoard();
     this.makeHtmlBoard();
     this.gameOver = false;
@@ -62,6 +63,7 @@ class Game {
     }
   }
 
+
   /** findSpotForCol: given column x, return top empty y (null if filled) */
   findSpotForCol(x) {
     for (let y = this.height - 1; y >= 0; y--) {
@@ -71,6 +73,7 @@ class Game {
     }
     return null;
   }
+
 
   /** placeInTable: update DOM to place piece into HTML table of board */
   placeInTable(y, x) {
@@ -83,9 +86,13 @@ class Game {
     spot.append(piece);
   }
 
+
   /** endGame: announce game end */
   endGame(msg) {
-    alert(msg);
+    setTimeout(function () {
+      alert(msg);
+    }, 700);
+
     const top = document.querySelector("#column-top");
     top.removeEventListener("click", this.handleGameClick);
   }
@@ -97,7 +104,6 @@ class Game {
     const x = +evt.target.id;
 
     // get next spot in column (if none, ignore click)
-
     const y = this.findSpotForCol(x);
     if (y === null) {
       return;
@@ -118,11 +124,13 @@ class Game {
       return this.endGame('Tie!');
     }
 
-    // switch players
-    this.currPlayer = this.currPlayer === this.players[0] ? this.players[1] : this.players[0];
+    //switch players by Incrementing playerState
+    this.playerState = this.playerState === this.players.length - 1 ? 0 : this.playerState + 1;
+    //Set current player to the plateState index of players
+    this.currPlayer = this.players[this.playerState];
   }
 
-
+  
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
   checkForWin() {
     const _win = (cells) => {
@@ -156,26 +164,58 @@ class Game {
       }
     }
   }
+  
 
 } //END OF GAME CLASS
 
+
 class Player {
-  constructor(color) {
+  constructor(id, color) {
+    this.id = id;
     this.color = color;
   }
-
 }//END OF PLAYER CLASS
 
 
+/////////////Game Setup 
+//Select number of player form
+const selectPlayers = document.getElementById('number-of-players');
 
-document.getElementById('new-game').addEventListener('click', () => {
-  let p1 = new Player(document.getElementById('p1-color').value);
-  let p2 = new Player(document.getElementById('p2-color').value);
-  if (p1.color === "" || p2.color === "") {
-    alert("Please select Player colors");
-  } else {
-    new Game(p1, p2, 7, 6);
+//Event Listener on Player Select
+selectPlayers.addEventListener('change', () => {
+  //Clear the inputs block on every change
+  document.getElementById('player-inputs').innerText = "";
+
+  //loop the number of players selected to create color inputs
+  for (let i = 0; i < selectPlayers.value; i++) {
+    //Create color input
+    const input = document.createElement("input");
+    //Add input attributes
+    input.setAttribute('id', `p${i + 1}-color`);
+    input.setAttribute('placeholder', `Player ${i + 1} color`);
+    //Append player inputs block on the DOM
+    document.getElementById('player-inputs').append(input);
   }
 });
 
+//New Game button event listener
+document.getElementById('new-game').addEventListener('click', () => {
 
+  //create array with all input values
+  const playerArray = Array.from(document.querySelectorAll('input')).map((input) => {
+    return input.value;
+  });
+
+  //create an array of player objects
+  const players = playerArray.map((playerColor) => {
+    return (new Player(`p${playerArray.indexOf(playerColor) + 1}`, playerColor))
+  });
+
+  //Check if any inputs are empty
+  if (playerArray.some((inputValue) => inputValue === "")) {
+    alert("Please select colors for all players");
+  } else {
+    //Create new game object with players object array
+    new Game(players, 7, 6);
+  }
+});

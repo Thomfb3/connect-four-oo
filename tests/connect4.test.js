@@ -1,7 +1,19 @@
 //Update to reflect main game variables
-let p1 = new Player("red");
-let p2 = new Player("blue");
-const game = new Game(p1, p2, 7, 6);
+
+const TEST_WIDTH = 7;
+const TEST_HEIGHT = 6;
+const TEST_PLAYERS = [
+    {
+        id: "p1",
+        color: "red"
+    },
+    {
+        id: "p2",
+        color: "blue"
+    }
+];
+
+const game = new Game(TEST_PLAYERS, TEST_WIDTH, TEST_HEIGHT);
 
 
 describe("#makeBoard - Game method", function () {
@@ -19,6 +31,7 @@ describe("#makeBoard - Game method", function () {
         expect(game.board).toEqual(completeBoard_7x6);
     });
 });
+
 
 
 describe("#makeHtmlBoard - Game method", function () {
@@ -46,6 +59,7 @@ describe("#makeHtmlBoard - Game method", function () {
 });
 
 
+
 describe("#placeInTable - Game method", function () {
     const x = 6;
     const y = 5;
@@ -60,6 +74,9 @@ describe("#placeInTable - Game method", function () {
 
 
 describe("#findSpotForCol - Game Method", function () {
+
+    const game2 = new Game(TEST_PLAYERS, TEST_WIDTH, TEST_HEIGHT);
+
     let testBoard_allNulls = [
         [null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null],
@@ -76,34 +93,25 @@ describe("#findSpotForCol - Game Method", function () {
         [null, null, null, null, 1, null, 2],
         [2, null, 1, null, 2, 1, 1]
     ];
-    //// Test version of findSpotForCol
-    function test_findSpotForCol(x, array) {
-        for (let y = game.height - 1; y >= 0; y--) {
-          if (!array[y][x]) {
-            return y;
-          }
-        }
-        return null;
-      }
 
-    
-    it("should detect childNode in appropriate cell", function () {
-        expect(test_findSpotForCol(1, testBoard_allNulls)).toEqual(5);
+
+    it("should find the spot for color", function () {
+        game2.board = testBoard_allNulls;
+        expect(game2.findSpotForCol(1)).toEqual(5);
     });
-    it("should detect childNode in appropriate cell", function () {
-        expect(test_findSpotForCol(3, testBoard_allNulls)).toEqual(5);
+    it("should find the spot for color", function () {
+        game2.board = testBoard_allNulls;
+        expect(game2.findSpotForCol(3)).toEqual(5);
     });
-    it("should detect childNode in appropriate cell", function () {
-        expect(test_findSpotForCol(6, testBoard_someNums)).toEqual(3);
+    it("should find the spot for color", function () {
+        game2.board = testBoard_someNums;
+        expect(game2.findSpotForCol(6)).toEqual(3);
     });
-    it("should detect childNode in appropriate cell", function () {
-        expect(test_findSpotForCol(0, testBoard_someNums)).toEqual(4);
+    it("should find the spot for color", function () {
+        game2.board = testBoard_someNums;
+        expect(game2.findSpotForCol(0)).toEqual(4);
     });
 });
-
-
-
-
 
 
 
