@@ -12,7 +12,7 @@ class Game {
     this.width = width;
     this.height = height;
     this.currPlayer = players[0];
-    this.playerState = 0
+    this.playerState = 0;
     this.makeBoard();
     this.makeHtmlBoard();
     this.gameOver = false;
@@ -197,6 +197,7 @@ selectPlayers.addEventListener('change', () => {
     document.getElementById('player-inputs').append(input);
   }
 });
+
 
 //New Game button event listener
 document.getElementById('new-game').addEventListener('click', () => {
