@@ -197,11 +197,6 @@ selectPlayers.addEventListener('change', () => {
     //Append player inputs block on the DOM
     document.getElementById('player-inputs').append(input);
 
-    if(selectPlayers.value === 1) {
-      const computer = document.createElement("input");
-      computer.setAttribute('id', `p${i + 2}-color`);
-      computer.setAttribute('placeholder', `Player ${i + 1} color`);
-    }
   }
 
 
