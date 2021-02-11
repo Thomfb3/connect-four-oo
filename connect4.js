@@ -8,6 +8,7 @@
 
 class Game {
   constructor(players, width, height) {
+    
     this.players = players;
     this.width = width;
     this.height = height;
@@ -195,7 +196,15 @@ selectPlayers.addEventListener('change', () => {
     input.setAttribute('placeholder', `Player ${i + 1} color`);
     //Append player inputs block on the DOM
     document.getElementById('player-inputs').append(input);
+
+    if(selectPlayers.value === 1) {
+      const computer = document.createElement("input");
+      computer.setAttribute('id', `p${i + 2}-color`);
+      computer.setAttribute('placeholder', `Player ${i + 1} color`);
+    }
   }
+
+
 });
 
 
@@ -212,6 +221,7 @@ document.getElementById('new-game').addEventListener('click', () => {
     return (new Player(`p${playerArray.indexOf(playerColor) + 1}`, playerColor))
   });
 
+ 
   //Check if any inputs are empty
   if (playerArray.some((inputValue) => inputValue === "")) {
     alert("Please select colors for all players");
