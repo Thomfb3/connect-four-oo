@@ -75,7 +75,7 @@ describe("#placeInTable - Game method", function () {
 
 describe("#findSpotForCol - Game Method", function () {
 
-    const game2 = new Game(TEST_PLAYERS, TEST_WIDTH, TEST_HEIGHT);
+    const game = new Game(TEST_PLAYERS, TEST_WIDTH, TEST_HEIGHT);
 
     let testBoard_allNulls = [
         [null, null, null, null, null, null, null],
@@ -96,22 +96,53 @@ describe("#findSpotForCol - Game Method", function () {
 
 
     it("should find the spot for color", function () {
-        game2.board = testBoard_allNulls;
-        expect(game2.findSpotForCol(1)).toEqual(5);
+        game.board = testBoard_allNulls;
+        expect(game.findSpotForCol(1)).toEqual(5);
     });
     it("should find the spot for color", function () {
-        game2.board = testBoard_allNulls;
-        expect(game2.findSpotForCol(3)).toEqual(5);
+        game.board = testBoard_allNulls;
+        expect(game.findSpotForCol(3)).toEqual(5);
     });
     it("should find the spot for color", function () {
-        game2.board = testBoard_someNums;
-        expect(game2.findSpotForCol(6)).toEqual(3);
+        game.board = testBoard_someNums;
+        expect(game.findSpotForCol(6)).toEqual(3);
     });
     it("should find the spot for color", function () {
-        game2.board = testBoard_someNums;
-        expect(game2.findSpotForCol(0)).toEqual(4);
+        game.board = testBoard_someNums;
+        expect(game.findSpotForCol(0)).toEqual(4);
     });
 });
+
+
+
+describe("#isColor - Check if color input is valid", function () {
+
+    it("should return true for valid color", function () {
+        expect(isColor('#fff')).toEqual(true);
+    });
+    it("should return true for valid color", function () {
+        expect(isColor('tomato')).toEqual(true);
+    });
+    it("should return true for valid color", function () {
+        expect(isColor('rgb(200,85,3)')).toEqual(true);
+    });
+
+    it("should return true for valid color", function () {
+        expect(isColor('rgba(200,85,3,.5)')).toEqual(true);
+    });
+    it("should return false for invalid color", function () {
+        expect(isColor('hello')).toEqual(false);
+    });
+    it("should return false for invalid color", function () {
+        expect(isColor('#afy9b')).toEqual(false);
+    });
+    it("should return false for invalid color", function () {
+        expect(isColor('rgb(red,835,3)')).toEqual(false);
+    });
+
+
+});
+
 
 
 
